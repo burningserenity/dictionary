@@ -7,7 +7,7 @@ data = json.load(open("data.json"))
 
 
 # function to get key as input and returns value
-def get_definition():
+def get_definitions():
     word = input("Enter a word to see its definition: ")
     word = word.lower()
     if word in data:
@@ -15,11 +15,20 @@ def get_definition():
     else:
         best_match = get_close_matches(word, data.keys(), cutoff=0.8)
         if len(best_match) > 0:
-            return "Did you mean %s instead?" % best_match[0]
+            ys = input("Did you mean %s instead? [y/N]: " % best_match[0])
+            if ys.lower() == 'y':
+                return data[best_match[0]]
+            else:
+                return get_definitions()
         else:
             return "Word not found in dictionary."
 
 
+def print_definitions(definitions):
+    for i in range(0, len(definitions)):
+        print(f"{i+1}. {definitions[i]}")
+
+
 # print output
-definition = get_definition()
-print(definition)
+definitions = get_definitions()
+print_definitions(definitions)
