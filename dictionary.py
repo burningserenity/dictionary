@@ -12,6 +12,10 @@ def get_definitions():
     word = word.lower()
     if word in data:
         return data[word]
+    elif word.title() in data:
+        return data[word.title()]
+    elif word.upper() in data:
+        return data[word.upper()]
     else:
         best_match = get_close_matches(word, data.keys(), cutoff=0.8)
         if len(best_match) > 0:
