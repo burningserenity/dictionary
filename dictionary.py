@@ -25,8 +25,11 @@ def get_definitions():
 
 
 def print_definitions(definitions):
-    for i in range(0, len(definitions)):
-        print(f"{i+1}. {definitions[i]}")
+    if type(definitions) == list:
+        for i in range(0, len(definitions)):
+            print(f"{i+1}. {definitions[i]}")
+    else:
+        print(definitions)
 
 
 # print output
